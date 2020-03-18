@@ -20,7 +20,9 @@ IF NOT EXIST ".bin\%CONFIG%-%PLATFORM%\Snake.exe" (
     echo .
 )
 
-start "Snake %CONFIG%-%PLATFORM%" ".bin\%CONFIG%-%PLATFORM%\Snake.exe"
+set COMMAND="mode CON: COLS=60 LINES=30 && .bin\%CONFIG%-%PLATFORM%\Snake.exe"
+
+start "Snake %CONFIG%-%PLATFORM%" cmd /C %COMMAND%
 IF %ERRORLEVEL% NEQ 0 (
     exit /B 2
 )
