@@ -1,0 +1,38 @@
+cmake_minimum_required(VERSION 3.8)
+project(Snake)
+
+IF(NOT DEFINED SNAKE_TARGET_PLATFORM OR SNAKE_TARGET_PLATFORM STREQUAL "")
+    message(FATAL_ERROR "Target platform not specified!")
+ELSE()
+    string(TOLOWER ${SNAKE_TARGET_PLATFORM} SNAKE_TARGET_PLATFORM)
+ENDIF()
+
+set(PLATFORM_DEFINITIONS)
+IF (SNAKE_TARGET_PLATFORM STREQUAL "windows")
+    list(APPEND PLATFORM_DEFINITIONS SNAKE_PLATFORM_WINDOWS)
+ELSE()
+    message(WARN "${SNAKE_TARGET_PLATFORM} is not a supported platform!")
+ENDIF()
+
+set(CMAKE_CXX_STANDARD_REQUIRED 17)
+
+set(CMAKE_CONFIGURATION_TYPES Debug Release Dist)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_SOURCE_DIR}/.bin/Debug-${SNAKE_TARGET_PLATFORM}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_SOURCE_DIR}/.bin/Release-${SNAKE_TARGET_PLATFORM}")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DIST "${CMAKE_SOURCE_DIR}/.bin/Dist-${SNAKE_TARGET_PLATFORM}")
+
+set(CMAKE_EXE_LINKER_FLAGS_DIST ${CMAKE_EXE_LINKER_FLAGS_RELEASE})
+
+set(SOURCES
+    src/Main.cpp
+    src/Snake/Snake.cpp
+    src/Core/Console.cpp
+    src/Core/Application.cpp
+)
+
+add_executable(Snake ${SOURCES})
+target_compile_definitions(
+    Snake PUBLIC
+    "SNAKE_DEBUG=$<OR:$<CONFIG:Debug>,$<CONFIG:Release>>"
+    ${PLATFORM_DEFINITIONS}
+)
