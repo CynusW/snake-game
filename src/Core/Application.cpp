@@ -23,7 +23,9 @@ Application::Application(int width, int height)
     m_buffer = std::make_unique<wchar_t[]>(width * height);
     m_exit = false;
 
-    Logger::Init();
+    #if SNAKE_DEBUG == 1
+        Logger::Init();
+    #endif
 
     m_applePos = { 3 * width / 4.f, m_height / 2.f };
 }
