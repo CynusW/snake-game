@@ -1,5 +1,6 @@
 #include "Application.h"
 
+#include "Machine.h"
 #include "Console.h"
 
 #if SNAKE_DEBUG == 1
@@ -9,9 +10,11 @@
 #include <chrono>
 #include <algorithm>
 
-#define KEY_PRESSED(x) (GetAsyncKeyState(x) & 0x8000)
-#define KEY_A 0x41
-#define KEY_D 0x44
+#ifdef SNAKE_PLATFORM_WINDOWS
+    #define KEY_PRESSED(x) (GetAsyncKeyState(x) & 0x8000)
+    #define KEY_A 0x41
+    #define KEY_D 0x44
+#endif
 
 Application::Application(int width, int height)
     : m_width(width), m_height(height),

@@ -1,5 +1,7 @@
 #include "Console.h"
 
+#include "Machine.h"
+
 #include <iostream>
 
 #if SNAKE_PLATFORM_WINDOWS
