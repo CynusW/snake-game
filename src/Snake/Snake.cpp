@@ -199,3 +199,11 @@ snake::Vector2D& operator/=(snake::Vector2D& vector, float scalar)
     return vector;
 }
 
+bool operator==(const snake::Vector2D& left, const snake::Vector2D& right)
+{
+    return (left.x == right.x) && (left.y) == (right.y);
+}
+bool operator!=(const snake::Vector2D& left, const snake::Vector2D& right)
+{
+    return (left.x != right.x) && (left.y) != (right.y);
+}

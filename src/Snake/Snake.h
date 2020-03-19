@@ -54,3 +54,6 @@ snake::Vector2D& operator+=(snake::Vector2D& left, const snake::Vector2D& right)
 snake::Vector2D& operator-=(snake::Vector2D& left, const snake::Vector2D& right);
 snake::Vector2D& operator*=(snake::Vector2D& vector, float scalar);
 snake::Vector2D& operator/=(snake::Vector2D& vector, float scalar);
+
+bool operator==(const snake::Vector2D& left, const snake::Vector2D& right);
+bool operator!=(const snake::Vector2D& left, const snake::Vector2D& right);
